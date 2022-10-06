@@ -15,6 +15,15 @@ pipeline
             		}
             	
         	}
-        
+        stage('Test Stage')
+		{
+			agent any
+			steps
+			{
+				echo 'This is Test part'
+			
+				sh 'python test.py'
+			}
+		}
     	}
 }
