@@ -79,9 +79,9 @@ docker rm jenkins_container  
 
 Tutorial 3
 
-In this exercise we will be initialising Swarm, with one manager and one worker node. 
+#In this exercise we will be initialising Swarm, with one manager and one worker node. 
 
-Simple Swarm Setup 
+#Simple Swarm Setup 
 
 Prerequisites 
 
@@ -91,59 +91,59 @@ Prerequisites 
 
     If you are using a cloud service, call one swarm-master and the other swarm-worker 
 
-Initilising the Swarm 
+#Initilising the Swarm 
 
-We need to create our first node in the Swarm which will serve as a Manager node. 
+#We need to create our first node in the Swarm which will serve as a Manager node. 
 
-On the first machine you have, run the follow command: 
+#On the first machine you have, run the follow command: 
 
 docker swarm init  
 
-Adding a Worker Node 
+#Adding a Worker Node 
 
-At this point the cluster is now setup and you may start creating services, however we will add a worker node first. 
+#At this point the cluster is now setup and you may start creating services, however we will add a worker node first. 
 
-Upon initilising the Swarm, Docker would have likely prompted you with a command that allows you to join a worker node to the swarm. 
+#Upon initilising the Swarm, Docker would have likely prompted you with a command that allows you to join a worker node to the swarm. 
 
-Once you have obtained the join command, you can simply run it on the second machine that you have. 
+#Once you have obtained the join command, you can simply run it on the second machine that you have. 
 
-The command will look similar to the one below, however the token and IP address will be different for yours, be sure to use the private address of the VM. 
+#The command will look similar to the one below, however the token and IP address will be different for yours, be sure to use the private address of the VM. 
 
-Log on to the worker node and run the join command similiar to below: 
+#Log on to the worker node and run the join command similiar to below: 
 
 # docker swarm join --token [TOKEN] [IP_ADDRESS]:[PORT] 
 docker swarm join --token SWMTKN-1-4y5lnvp7h7l7pt2qusvykiyk8p0hn0yywq3gk47ogau8pl64f9-15hstsq0lahr72cz6dppex0i6 swarm-master:2377  
 
-Also take a moment here to notice which port the workers are connecting from; 2377. 
+#Also take a moment here to notice which port the workers are connecting from; 2377. 
 
-This will be important to allow on locked down networks. 
+#This will be important to allow on locked down networks. 
 
-Retrieving the Join Command 
+#Retrieving the Join Command 
 
-If you can’t obtain the join command anymore, you can use the join-token command while on the master node to get it back: 
+#If you can’t obtain the join command anymore, you can use the join-token command while on the master node to get it back: 
 
 docker swarm join-token worker  
 
-Create Your First Swarm Service 
+#Create Your First Swarm Service 
 
-When managing Swarm services, ensure that you are first on the manager node. 
+#When managing Swarm services, ensure that you are first on the manager node. 
 
-Here we will create a simple NGINX service and use the curl CLI tool to access it. 
+#Here we will create a simple NGINX service and use the curl CLI tool to access it. 
 
 # docker service create --name [NAME] --publish [HOST_PORT]:[CONTAINER_PORT] [IMAGE]:[TAG] 
 docker service create --name nginx --publish 80:80 nginx:latest  
 
-Once you have created the service, it will be accessible on the private IP address of the machine, not the loopback interface (localhost). 
+#Once you have created the service, it will be accessible on the private IP address of the machine, not the loopback interface (localhost). 
 
-To access the NGINX service for this example, the curl command below can be used, the NGINX service will be available from both the worker and master node: 
+#To access the NGINX service for this example, the curl command below can be used, the NGINX service will be available from both the worker and master node: 
 
 # curl http://[PRIVATE_IP_ADDRESS] 
 curl http://swarm-master 
 curl http://swarm-worker  
 
-Delete Your First Swarm Service 
+#Delete Your First Swarm Service 
 
-Let's remove the service that we created: 
+#Let's remove the service that we created: 
 
 docker service rm nginx 
 
