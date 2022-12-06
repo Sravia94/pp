@@ -13,41 +13,6 @@ curl https://get.docker.com | sudo bash 
 sudo usermod -aG docker $(whoami) 
 
 
-Tutorial 1 
-
-#In this tutorial, we will register for Docker and then exercise the commands. 
-
-#First, register an account with Docker here 
-
-#Once created, authenticate the Docker CLI to Dockerhub with the login command. 
-
-docker login  
-
-#Next, let's download the official Java image. 
-
-docker search java 
-
-docker pull java  
-
-#Rename the Java 8 Docker image so that it is prefixed with your Docker hub name 
-
-#Replace <your_docker_username> with your Docker username and run the following command: 
-
-docker tag java <your_docker_username>/java:8  
-
-#Now, when we run docker images, we can see two images. We have created a new image with a different name. Now we can push the newly tagged image to our repository by tagging it in the format [USERNAME]/[IMAGE]:[TAG]. 
-
-docker push <your_docker_username>/java:8  
-
-#Navigate to Dockerhub, and you should see a new repository. 
-
-#Now that the image has been uploaded, we can delete the images we have locally and free up space. 
-
-#Delete the java image 
-
-docker rmi java  
-
-
 
 Tutorial 2  
 
